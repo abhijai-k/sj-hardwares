@@ -1,38 +1,47 @@
-import React, { useState, useEffect } from 'react';
-
-// Import your images directly
-import image1 from '../Assets/hero1.jpg';
-import image2 from '../Assets/hero2.jpg';
-import image3 from '../Assets/hero3.jpg';
+import React from 'react';
+import logoImage from '../Assets/lock.png';
 
 const Hero = () => {
-  const images = [image1, image2, image3]; // Array of images
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
-  // Change the image every 3 seconds
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length); // Cycles through images
-    }, 3000);
-
-    return () => clearInterval(interval); // Clean up interval on unmount
-  }, [images.length]);
+  const scrollToProducts = () => {
+    const section = document.getElementById('products'); // Ensure this ID matches the product section
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
-    <section
-      className={`flex items-center justify-center h-screen bg-cover bg-center transition-all duration-500`}
-      style={{ backgroundImage: `url(${images[currentImageIndex]})` }} // Dynamically update background image
-    >
-      <div className="bg-black bg-opacity-60 p-6 rounded-lg text-center">
-        <h1 className="text-4xl font-bold text-white">Welcome To SJ Hardwares</h1>
-        <p className="mt-4 text-lg text-gray-200">
-          We provide the best quality hardware tools and equipments.
-        </p>
-        <button className="mt-6 px-4 py-2 bg-gray-900 text-white rounded transition duration-200 hover:bg-purple-700">
-          Shop Now
+    <section className="relative flex flex-col items-center justify-center h-screen bg-white text-center">
+      <div className="flex flex-col items-center">
+        {/* Letter-by-Letter Animation for Welcome Text */}
+        <h1 className="text-4xl md:text-6xl font-bold mb-4 text-gray-800">
+          {Array.from("Welcome to SJ Hardwares").map((letter, index) => (
+            <span
+              key={index}
+              className="inline-block animate-letter"
+              style={{ animationDelay: `${index * 0.1}s` }}
+            >
+              {letter === " " ? "\u00A0" : letter}
+            </span>
+          ))}
+        </h1>
+
+        {/* Fade-in Animation for Second Text */}
+        <p className="text-lg md:text-xl mb-8 text-gray-600 fade-in-text">Unlock Quality Tools and Materials</p>
+
+        {/* Apply the new shaking effect class to the image */}
+        <img 
+          src={logoImage} 
+          alt="SJ Hardwares Logo" 
+          className="w-50 h-80 mb-6 shake-subtle-image" 
+        />
+        
+        <button 
+          className="px-6 py-3 bg-black hover:bg-gray-700 rounded-lg text-white font-semibold"
+          onClick={scrollToProducts} // Call the scroll function on click
+        >
+          Unlock Products
         </button>
       </div>
-      <div className="absolute bottom-0 left-0 w-full h-1/3 bg-gradient-to-t from-black to-transparent"></div>
     </section>
   );
 };

@@ -1,38 +1,38 @@
-.App {
-  text-align: center;
+@keyframes letter-animation {
+  0% { opacity: 0; transform: translateY(-10px); }
+  100% { opacity: 1; transform: translateY(0); }
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.animate-letter {
+  opacity: 0;
+  animation: letter-animation 0.5s forwards;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* Fade-in Animation for Second Text */
+@keyframes fade-in {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.fade-in-text {
+  opacity: 0;
+  animation: fade-in 1s forwards;
+  animation-delay: 2s; /* Adjust delay to start after the first text animation */
+}
+@keyframes subtleShake {
+  0% { transform: translateX(0) rotate(0deg); }
+  10% { transform: translateX(-5px) rotate(-2deg); } /* Slightly rotate left */
+  20% { transform: translateX(5px) rotate(2deg); }   /* Slightly rotate right */
+  30% { transform: translateX(-3px) rotate(-1deg); } /* Less rotation left */
+  40% { transform: translateX(3px) rotate(1deg); }   /* Less rotation right */
+  50% { transform: translateX(-2px); }                /* Small left move */
+  60% { transform: translateX(2px); }                 /* Small right move */
+  70% { transform: translateX(-1px); }                /* Even smaller left move */
+  80% { transform: translateX(1px); }                 /* Even smaller right move */
+  90% { transform: translateX(0); }                   /* Return to center */
+  100% { transform: translateX(0); }                  /* End at center */
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.shake-subtle-image {
+  animation: subtleShake 2s ease-in-out infinite; /* Adjust duration as needed */
 }
